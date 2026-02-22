@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+        }
+        
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo img {
+            width: 100px;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .language-select {
+            margin-right: 15px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: 1px solid #aaa;
+            padding: 5px 10px;
+            border-radius: 2px;
+        }
+        
+        .sign-in-btn {
+            background-color: #e50914;
+            color: white;
+            border: none;
+            padding: 7px 17px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 70px 0;
+            background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0.8) 100%), url('https://assets.nflxext.com/ffe/siteui/vlv3/a43711df-c428-4f88-8bb3-b2ac5f20608f/32935458-d049-44c2-b94b-32f16d60ded1/CA-en-20230227-popsignuptwoweeks-perspective_alpha_website_small.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            max-width: 800px;
+        }
+        
+        .hero p {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .email-form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .email-input {
+            width: 100%;
+            max-width: 400px;
+            height: 48px;
+            padding: 10px;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid #8c8c8c;
+            color: white;
+            border-radius: 2px;
+        }
+        
+        .get-started-btn {
+            background-color: #e50914;
+            color: white;
+            border: none;
+            height: 48px;
+            padding: 0 30px;
+            font-size: 1rem;
+            border-radius: 2px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .get-started-btn span {
+            margin-right: 5px;
+        }
+        
+        /* Promo Banner */
+        .promo-banner {
+            display: flex;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 15px 20px;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        
+        .popcorn-icon {
+            width: 50px;
+            margin-right: 15px;
+        }
+        
+        .promo-content {
+            flex-grow: 1;
+        }
+        
+        .promo-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .promo-content p {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        .learn-more-btn {
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        /* Trending Section */
+        .trending-section {
+            padding: 40px 50px;
+        }
+        
+        .trending-section h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .trending-row {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+        }
+        
+        .trending-item {
+            position: relative;
+            min-width: 180px;
+        }
+        
+        .trending-item img {
+            width: 100%;
+            border-radius: 4px;
+        }
+        
+        .trending-number {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 4rem;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.7);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 40px 50px;
+        }
+        
+        .features-section h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .features-row {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .feature-card {
+            background-color: rgb(35, 35, 35);
+            border-radius: 10px;
+            padding: 20px;
+            flex: 1;
+            max-width: 250px;
+            text-align: center;
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 15px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .feature-card p {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 40px 50px;
+        }
+        
+        .faq-section h2 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 10px;
+            background-color: #303030;
+            border-radius: 2px;
+        }
+        
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .plus-icon {
+            font-size: 1.5rem;
+        }
+        
+        /* Footer Form */
+        .footer-form {
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 50px;
+            color: #757575;
+            font-size: 0.9rem;
+        }
+        
+        .footer-top {
+            margin-bottom: 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-link {
+            color: #757575;
+            text-decoration: none;
+        }
+        
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+        
+        .footer-country {
+            margin-top: 20px;
+        }
+        
+        /* Cookie Notice */
+        .cookie-notice {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+        
+        .cookie-text {
+            flex-grow: 1;
+            font-size: 0.9rem;
+        }
+        
+        .cookie-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .cookie-btn {
+            padding: 7px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .learn-more-cookie {
+            background-color: #e50914;
+            color: white;
+            border: none;
+        }
+        
+        .close-cookie {
+            background-color: transparent;
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cookie Notice -->
+    <div class="cookie-notice">
+        <div class="cookie-text">
+            Netflix uses cookies for personalization, to customize its online advertisements, and for other purposes. Read more here or change your cookie preferences by selecting 'Learn more'. Netflix supports the Digital Advertising Alliance principles. By interacting with this site, you agree to our use of cookies.
+        </div>
+        <div class="cookie-buttons">
+            <button class="cookie-btn learn-more-cookie">Learn more</button>
+            <button class="close-cookie">×</button>
+        </div>
+    </div>
+    
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png" alt="Netflix Logo">
+        </div>
+        <div class="header-right">
+            <select class="language-select">
+                <option>English</option>
+            </select>
+            <button class="sign-in-btn">Sign In</button>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Unlimited movies, TV shows and more</h1>
+        <p>Starts at CA$7.99. Cancel at any time.</p>
+        <p>Ready to watch? Enter your email to create or restart your membership.</p>
+        <div class="email-form">
+            <input type="email" placeholder="Email address" class="email-input">
+            <button class="get-started-btn">Get Started <span>></span></button>
+        </div>
+    </section>
+    
+    <!-- Promo Banner -->
+    <div class="promo-banner">
+        <img src="https://i.imgur.com/fK5Oazl.png" alt="Popcorn" class="popcorn-icon">
+        <div class="promo-content">
+            <h3>The Netflix you love for just CA$7.99.</h3>
+            <p>Get our most affordable, ad-supported plan.</p>
+        </div>
+        <button class="learn-more-btn">Learn More</button>
+    </div>
+    
+    <!-- Trending Section -->
+    <section class="trending-section">
+        <h2>Trending Now</h2>
+        <div class="trending-row">
+            <div class="trending-item">
+                <img src="https://i.imgur.com/jLEk3Sq.jpg" alt="Formula 1: Drive to Survive">
+                <div class="trending-number">1</div>
+            </div>
+            <div class="trending-item">
+                <img src="https://i.imgur.com/K4SQAHp.jpg" alt="Arson Murders">
+                <div class="trending-number">2</div>
+            </div>
+            <div class="trending-item">
+                <img src="https://i.imgur.com/WQgN8yS.jpg" alt="Love is Blind">
+                <div class="trending-number">3</div>
+            </div>
+            <div class="trending-item">
+                <img src="https://i.imgur.com/uH5RPkG.jpg" alt="Girl in Yellow Dress">
+                <div class="trending-number">4</div>
+            </div>
+            <div class="trending-item">
+                <img src="https://i.imgur.com/LdKHLDM.jpg" alt="Abstract Art">
+                <div class="trending-number">5</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features-section">
+        <h2>More reasons to join</h2>
+        <div class="features-row">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="white">
+                        <path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/>
+                    </svg>
+                </div>
+                <h3>Enjoy on your TV</h3>
+                <p>Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="white">
+                        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                    </svg>
+                </div>
+                <h3>Download your shows to watch offline</h3>
+                <p>Save your favourites easily and always have something to watch.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="white">
+                        <path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12zm-2-9H8v2h11V8zm0 4H8v2h11v-2zM7 8H5v2h2V8zm0 4H5v2h2v-2z"/>
+                    </svg>
+                </div>
+                <h3>Watch everywhere</h3>
+                <p>Stream unlimited movies and TV shows on your phone, tablet, laptop and TV.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="white">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <h3>Create profiles for kids</h3>
+                <p>Send kids on adventures with their favourite characters in a space made just for them — free with your membership.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What is Netflix?</span>
+                    <span class="plus-icon">+</span>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How much does Netflix cost?</span>
+                    <span class="plus-icon">+</span>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Where can I watch?</span>
+                    <span class="plus-icon">+</span>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I cancel?</span>
+                    <span class="plus-icon">+</span>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>What can I watch on Netflix?</span>
+                    <span class="plus-icon">+</span>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is Netflix good for kids?</span>
+                    <span class="plus-icon">+</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer Form -->
+    <div class="footer-form">
+        <p>Ready to watch? Enter your email to create or restart your membership.</p>
+        <div class="email-form">
+            <input type="email" placeholder="Email address" class="email-input">
+            <button class="get-started-btn">Get Started <span>></span></button>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <p>Questions? Call 1-844-542-4813</p>
+        </div>
+        <div class="footer-grid">
+            <a href="#" class="footer-link">FAQ</a>
+            <a href="#" class="footer-link">Help Centre</a>
+            <a href="#" class="footer-link">Account</a>
+            <a href="#" class="footer-link">Media Centre</a>
+            <a href="#" class="footer-link">Investor Relations</a>
+            <a href="#" class="footer-link">Jobs</a>
+            <a href="#" class="footer-link">Ways to Watch</a>
+            <a href="#" class="footer-link">Terms of Use</a>
+            <a href="#" class="footer-link">Privacy</a>
+            <a href="#" class="footer-link">Cookie Preferences</a>
+            <a href="#" class="footer-link">Corporate Information</a>
+            <a href="#" class="footer-link">Contact Us</a>
+            <a href="#" class="footer-link">Speed Test</a>
+            <a href="#" class="footer-link">Legal Notices</a>
+            <a href="#" class="footer-link">Only on Netflix</a>
+        </div>
+        <div class="language-select-footer">
+            <select class="language-select">
+                <option>English</option>
+            </select>
+        </div>
+        <div class="footer-country">
+            <p>Netflix India</p>
+        </div>
+    </footer>
+</body>
+</html>
